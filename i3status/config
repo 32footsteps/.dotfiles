@@ -1,0 +1,127 @@
+general {
+  output_format = "i3bar"
+  colors = true
+  interval = 2
+}
+
+order += "whoami"
+order += "uname"
+order += "window_title_async"
+order += "spotify"
+order += "volume_status"
+order += "disk /"
+order += "battery_level"
+order += "backlight"
+#order += "xrandr_rotate"
+order += "wifi"
+order += "bluetooth"
+order += "tztime local"
+
+arch_updates {
+  include_aur = true
+  format = "{pacman}/{aur} updates"
+}
+
+battery_level {
+  format = "{icon}: {percent}%"
+  blocks = ""
+  cache_timeout = 5
+  hide_when_full = "true"
+  color_charging = "#ff8c00"
+}
+
+backlight {
+  device = ":0"
+  on_click 4 = "exec backlight -inc 10"
+  on_click 5 = "exec backlight -dec 10"
+  color_good = "#1793d0"
+}
+
+bluetooth {
+  format_prefix = ": "
+  format_no_conn_prefix = ": "
+  color_good = "#1793d0"
+  color_bad = "#c0c0c0"
+  on_click 1 = "exec blueman-manager"
+  on_click 3 = "exec killall blueman-manager"
+}
+
+disk "/" {
+  format = ": %free"
+  prefix_type = "custom"
+}
+
+ethernet eno1 {
+  format_up = ": %speed"
+  format_down = ": down"
+}
+
+spotify {
+  format = " : {artist} : {title}"
+  format_stopped = ": STOPPED"
+  format_down = ": OFF"
+  color_playing = "#1793d0"
+  color_offline = "#c0c0c0"
+  button_next = 4
+  button_previous = 5
+  on_click 1 = "exec --no-startup-id i3-msg workspace 10; exec spotify --force-device-scale-factor=1.7"
+  on_click 3 = "exec killall spotify"
+}
+
+tztime local {
+  format = "%R %Z"
+}
+
+uname{
+  format = "{system} {release} {machine}"
+}
+
+volume_status {
+  #device = "default"
+  #channel = "Master"
+  cache_timeout = .5
+  format = ": {percentage}%"
+  format_muted = ": mute"
+  color_good = "#1793d0"
+  color_bad = "#c0c0c0"
+  threshold_bad = 1
+  threshold_degraded = 20
+  color_degraded = "#a0a0a0"
+  button_up = 4
+  button_down = 5
+  on_click 1 = "exec pactl set-sink-mute @DEFAULT_SINK@ toggle"
+}
+
+whoami {
+  on_click 1 = "exec i3-sensible-terminal -e reboot"
+  on_click 3 = "exec i3-sensible-terminal -e poweroff"
+}
+
+wifi {
+  format_up = ": {ip}"
+  format_down = ": down"
+  down_color = "#c0c0c0"
+  color_good = "#1793d0"
+  bitrate_bad = 0
+  bitrate_degraded = .5
+  on_click 1 = "exec i3-sensible-terminal -e nmtui"
+  on_click 3 = "exec killall nmtui"
+}
+
+window_title_async {
+  color = "#1793d0"
+  format = "{title}"
+  empty_title = " clean "
+  on_click 1 = ""
+  on_click 3 = ""
+}
+
+
+xrandr_rotate {
+  screen = "eDP1"
+  color_good = "#c0c0c0"
+  horizontal_icon = ""
+  vertical_icon = ""
+  on_click 1 = "exec --no-startup-id /home/john/aur/grox/grox.rb normal"
+  on_click 3 = "exec --no-startup-id /home/john/aur/grox/grox.rb right"
+}
