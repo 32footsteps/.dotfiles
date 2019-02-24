@@ -1,7 +1,7 @@
 ########################
 # Wallpaper
 ########################
-  exec --no-startup-id /usr/bin/feh --bg-fill /home/john/Pictures/hex.png
+#  exec --no-startup-id /usr/bin/feh --bg-fill /home/john/Documents/grey-arch.png
 
 ########################
 # set mod key to super
@@ -12,15 +12,15 @@
 # Colors
 ########################
   #colorclass               border    bckgrnd    text
-  client.focused            #9e9e9e   #9e9e9e    #ffffff
+  client.focused            #2b303b   #2b303b    #ffffff
   client.unfocused          #000000   #000000    #ffffff
 
 ########################
 # Misc
 ########################
 #no titlebars - set value to 0
-  default_border pixel 4
-  default_floating_border pixel 4
+  default_border pixel 2
+  default_floating_border pixel 2
 
 #mouse focus
   focus_follows_mouse no
@@ -51,7 +51,7 @@
       colors {
         background  #000000
         separator   #c0c0c0
-        statusline #c0c0c0
+        statusline #c0c0c099
       }
       font pango:Open Sans, FontAwesome 10
       position top
@@ -208,6 +208,7 @@
     bindsym i exec inkscape; mode "default"
     bindsym s exec /home/john/aur/sqldeveloper/sqldeveloper.sh; mode "default"
     bindsym r exec rstudio-bin; mode "default"
+    bindsym u exec "dia --integrated"; mode "default"
     #defaults
       bindsym Return mode "default"
       bindsym Escape mode "default"

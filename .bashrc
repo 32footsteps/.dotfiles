@@ -99,3 +99,9 @@ export VISUAL="nano"
 PRINTER=HP_OfficeJet_Pro_6970
 export PRINTER
 
+#for skype to use video and such
+LD_PRELOAD=/usr/lib/libv4l/v4l1compat.so
+
+#for custom scripts
+export PATH=/home/john/.src/bin:$PATH
+
