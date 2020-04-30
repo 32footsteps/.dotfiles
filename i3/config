@@ -1,7 +1,8 @@
+
 ########################
 # Wallpaper
 ########################
-#  exec --no-startup-id /usr/bin/feh --bg-fill /home/john/Documents/grey-arch.png
+  exec --no-startup-id /usr/bin/feh --bg-fill /home/john/Pictures/snow_arch_wallpaper.png
 
 ########################
 # set mod key to super
@@ -15,32 +16,20 @@
   client.focused            #2b303b   #2b303b    #ffffff
   client.unfocused          #000000   #000000    #ffffff
 
+
+
 ########################
 # Misc
 ########################
-#no titlebars - set value to 0
-  default_border pixel 2
-  default_floating_border pixel 2
+  #no titlebars - set value to 0
+  default_border pixel 4
+  default_floating_border pixel 4
 
-#mouse focus
+  #mouse focus
   focus_follows_mouse no
 
-#avoid mouse warping on switching displays
+  #avoid mouse warping on switching displays
   mouse_warping none
-
-########################
-# Gaps - (install i3gaps and uncomment to use)
-########################
-#  gaps inner 20
-#  gaps outer 0
-#  smart_gaps on
-
-########################
-# Start-up tray icons
-########################
-#exec --no-startup-id nm-applet
-#exec --no-startup-id volumeicon
-#exec --no-startup-id blueman-applet
 
 ########################
 # i3bar settings
@@ -49,11 +38,17 @@
       tray_output none
       status_command py3status -c ~/.config/i3status/config  ##to lazy to change the config file :)
       colors {
-        background  #000000
-        separator   #c0c0c0
-        statusline #c0c0c099
+        background  #c1c5c8
+        separator   #20577a
+        statusline  #20577a
+
+        focused_workspace  #20577a #c1c5c8 #20577a
+        active_workspace   #20577a #c1c5c8 #20577a
+        inactive_workspace #20577a #666666 #20577a
+        urgent_workspace   #20577a #990000 #20577a
+        binding_mode       #20577a #c1c5c8 #20577a
       }
-      font pango:Open Sans, FontAwesome 10
+      font pango:Fira Code Medium, FontAwesome 10
       position top
       separator_symbol " | "
   }
@@ -61,63 +56,63 @@
 ########################
 # System font
 ########################
-  font pango:Open Sans 11
+  font pango:Fira Code Medium 11
 
 ########################
 # Keybindings
 ########################
-# Use Mouse+$mod to drag floating windows to their wanted position
+  #Use Mouse+$mod to drag floating windows to their wanted position
   floating_modifier $mod
 
-# start a terminal
+  #start a terminal
   bindsym $mod+Return exec i3-sensible-terminal
 
-# kill focused window
+  #kill focused window
   bindsym $mod+Shift+q kill
 
-# start dmenu (a program launcher)
-#  bindsym $mod+d exec dmenu_run
-  bindsym $mod+d exec rofi -show run
+  #start dmenu (a program launcher)
+  #bindsym $mod+d exec dmenu_run <- uncomment for basic dmenu
+  bindsym $mod+d exec rofi -show run # <- comment if using the above base dmenu
 
-# change focus
+  #change focus
   bindsym $mod+Left focus left
   bindsym $mod+Down focus down
   bindsym $mod+Up focus up
   bindsym $mod+Right focus right
 
-# move focused window
+  #move focused window
   bindsym $mod+Shift+Left move left
   bindsym $mod+Shift+Down move down
   bindsym $mod+Shift+Up move up
   bindsym $mod+Shift+Right move right
 
-# split in horizontal orientation
+  #split in horizontal orientation
   bindsym $mod+h split h
 
-# split in vertical orientation
+  #split in vertical orientation
   bindsym $mod+v split v
 
-# enter fullscreen mode for the focused container
+  #enter fullscreen mode for the focused container
   bindsym $mod+f fullscreen toggle
 
-# change container layout (stacked, tabbed, toggle split)
+  #change container layout (stacked, tabbed, toggle split)
   bindsym $mod+s layout stacking
   bindsym $mod+w layout tabbed
   bindsym $mod+e layout toggle split
 
-# toggle tiling / floating
+  #toggle tiling / floating
   bindsym $mod+Shift+space floating toggle
 
-# change focus between tiling / floating windows
+  #change focus between tiling / floating windows
   bindsym $mod+space focus mode_toggle
 
-# focus the parent container
+  #focus the parent container
   bindsym $mod+a focus parent
 
-# focus the child container
-   #bindsym $mod+d focus child
+  #focus the child container
+  #bindsym $mod+d focus child
 
-# switch to workspace
+  #switch to workspace
   bindsym $mod+1 workspace 1
   bindsym $mod+2 workspace 2
   bindsym $mod+3 workspace 3
@@ -129,7 +124,7 @@
   bindsym $mod+9 workspace 9
   bindsym $mod+0 workspace 10
 
-# move focused container to workspace
+  #move focused container to workspace
   bindsym $mod+Shift+1 move container to workspace 1
   bindsym $mod+Shift+2 move container to workspace 2
   bindsym $mod+Shift+3 move container to workspace 3
@@ -141,16 +136,16 @@
   bindsym $mod+Shift+9 move container to workspace 9
   bindsym $mod+Shift+0 move container to workspace 10
 
-# reload the configuration file
+  #reload the configuration file
   bindsym $mod+Shift+c reload
 
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+  #restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
   bindsym $mod+Shift+r restart
 
-# exit i3 (logs you out of your X session)
+  #exit i3 (logs you out of your X session)
   bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Do you want to kill X?' -b 'Yes, exit i3' 'i3-msg exit'"
 
-# resize window (you can also use the mouse for that)
+  #resize window (you can also use the mouse for that)
   mode "resize" {
           # These bindings trigger as soon as you enter the resize mode
 
@@ -176,11 +171,11 @@
   bindsym $mod+r mode "resize"
 
 
-#kill window on middle click from titlebar
-#  bindsym --release button2 kill
+  #kill window on middle click from titlebar
+  #bindsym --release button2 kill
 
-#shutdown menu
-  set $Locker i3lock && sleep 1
+  #shutdown menu
+  set $Locker i3lock --fuzzy && sleep 1
   set $mode_system System (l) lock, (e) logout, (r) reboot, (Shift+s) shutdown
   mode "$mode_system" {
     bindsym l exec --no-startup-id $Locker, mode "default"
@@ -209,51 +204,54 @@
     bindsym s exec /home/john/aur/sqldeveloper/sqldeveloper.sh; mode "default"
     bindsym r exec rstudio-bin; mode "default"
     bindsym u exec "dia --integrated"; mode "default"
+    bindsym m exec thunderbird; mode "default"
     #defaults
       bindsym Return mode "default"
       bindsym Escape mode "default"
   }
   bindsym $mod+l mode "Launch"
 
-#firefox
+  #firefox
   bindsym $mod+Shift+f exec firefox
 
-#chrome
+  #chrome
   bindsym $mod+Shift+g exec chromium
 
-#atom
+  #atom
   bindsym $mod+Shift+a exec atom
 
-#pithos
-#  bindsym $mod+Shift+p exec pithos
+  #pithos
+  #bindsym $mod+Shift+p exec pithos
 
 ########################
 # Laptop quick key bindings
 ########################
-#calculator
+  #calculator
   bindsym $mod+Alt+0 exec galculator
 
-#volume control - ALSA
-#  bindsym XF86AudioRaiseVolume exec amixer sset Master 5%+
-#  bindsym XF86AudioLowerVolume exec amixer sset Master 5%-
-#  bindsym XF86AudioMute exec amixer set Master toggle
+  #volume control - ALSA <- legacy settings if pulseaudio is not installed/wanted
+  #bindsym XF86AudioRaiseVolume exec amixer sset Master 5%+
+  #bindsym XF86AudioLowerVolume exec amixer sset Master 5%-
+  #bindsym XF86AudioMute exec amixer set Master toggle
 
-#volume control - pulseaudio
+  #volume control - pulseaudio
   bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
   bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
   bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
-     ###pulseaudio toggle microphone
-  bindsym XF86AudioMicMute exec pactl set-source-mute 1 toggle
 
-#brightness control
+  #pulseaudio toggle microphone
+  bindsym XF86AudioMicMute exec pactl set-source-mute 0 1toggle
+
+  #brightness control
   bindsym XF86MonBrightnessUp exec --no-startup-id  light -A 5
   bindsym XF86MonBrightnessDown exec --no-startup-id  light -U 5
 
-#player keys
-#  bindsym XF86AudioPlay exec --no-startup-id mocp -G
-#  bindsym XF86AudioPrev exec --no-startup-id mocp -f
-#  bindsym XF86AudioNext exec --no-startup-id mocp -r
+  #player keys  <- only for music on console player
+  #bindsym XF86AudioPlay exec --no-startup-id mocp -G
+  #bindsym XF86AudioPrev exec --no-startup-id mocp -f
+  #bindsym XF86AudioNext exec --no-startup-id mocp -r
 
 ########################
 # Custom workspaces
 ########################
+#put anything else custom here

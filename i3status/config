@@ -1,130 +1,137 @@
 general {
-  output_format = "i3bar"
-  colors = true
-  interval = 2
+ output_format = "i3bar"
+ colors = true
+ color_degraded = "#e2571e"
+ interval = 2
 }
 
-order += "whoami"
 order += "uname"
-order += "window_title_async"
-order += "spotify"
+#order += "window_title_async"
+order += "wifi"
 order += "volume_status"
-order += "disk /"
+#order += "disk /"
 order += "battery_level"
 order += "backlight"
 #order += "xrandr_rotate"
-order += "wifi"
+order += "spotify"
 order += "bluetooth"
 order += "tztime local"
+order += "whoami"
 
 arch_updates {
-  include_aur = true
-  format = "{pacman}/{aur} updates"
+ include_aur = true
+ format = "{pacman}/{aur} updates"
 }
 
 battery_level {
-  format = "{icon}  {percent}%"
-  blocks = ""
-  cache_timeout = 5
-  hide_when_full = "true"
-  color_charging = "#ff8c00"
+ format = "{icon} {percent}%"
+ blocks = ""
+ charging_character = ""
+ cache_timeout = 5
+ hide_when_full = "true"
+ color_charging = "#ff8c00"
 }
 
 backlight {
-  device = ":0"
-  format = "☼  {level}%"
-  on_click 4 = "exec backlight -inc 10"
-  on_click 5 = "exec backlight -dec 10"
-  color_good = "#1793d0"
+ device = "0"
+ format = " {level}%"
+ on_click 4 = "exec backlight -inc 10"
+ on_click 5 = "exec backlight -dec 10"
+ color_good = "#20577a"
 }
 
 bluetooth {
-  format_prefix = "  "
-  format_no_conn_prefix = "  "
-  color_good = "#1793d0"
-  color_bad = "#c0c0c0"
-  on_click 1 = "exec blueman-manager"
-  on_click 3 = "exec killall blueman-manager"
+ format_prefix = " "
+ format_no_conn_prefix = " "
+ color_good = "#81a684"
+ color_bad = "#20577a"
+ on_click 1 = "exec blueman-manager"
+ on_click 3 = "exec killall blueman-manager"
 }
 
 disk "/" {
-  format = "  %free"
-  prefix_type = "custom"
+ format = " %free"
+ prefix_type = "custom"
 }
 
 ethernet eno1 {
-  format_up = "  %speed"
-  format_down = "  down"
+ format_up = " %speed"
+ format_down = " down"
+ color_bad = "#20577a"
+ threshold_bad = 1
+ threshold_degraded = 20
+ color_degraded = "#ff8c00"
 }
 
 spotify {
-  format = "   {artist} ~ {title}"
-  format_stopped = "  STOPPED"
-  format_down = "  OFF"
-  color_playing = "#1793d0"
-  color_offline = "#c0c0c0"
-  button_next = 4
-  button_previous = 5
-  on_click 1 = "exec --no-startup-id i3-msg workspace 10; exec spotify --force-device-scale-factor=1.7"
-  on_click 3 = "exec killall spotify"
+ format = " {artist} ~ {title}"
+ format_stopped = " pause"
+ format_down = ""
+ color_playing = "#1793d1"
+ color_offline = "#20577a"
+ color_paused = "#ff8c00"
+ button_next = 4
+ button_previous = 5
+ on_click 1 = "exec --no-startup-id i3-msg workspace 10; exec spotify --force-device-scale-factor=1.7"
+ on_click 3 = "exec killall spotify"
 }
 
 tztime local {
-  format = "🕒 %R %Z"
+ format = " %R %Z"
 }
 
 uname{
-  format = "🐧 {system} {release}"
+ format = " {system} {release}"
 }
 
 volume_status {
-  #device = "default"
-  #channel = "Master"
-  cache_timeout = .5
-  format = "  {percentage}%"
-  format_muted = "  mute"
-  color_good = "#1793d0"
-  color_bad = "#c0c0c0"
-  threshold_bad = 1
-  threshold_degraded = 20
-  color_degraded = "#a0a0a0"
-  button_up = 4
-  button_down = 5
-  on_click 1 = "exec pactl set-sink-mute @DEFAULT_SINK@ toggle"
+ #device = "default"
+ #channel = "Master"
+ cache_timeout = .5
+ format = " {percentage}%"
+ format_muted = " mute"
+ thresholds = [
+        (0, "#000000"),
+        (30, "#1793d1"),
+        (75, "#20577a")
+    ]
+ button_up = 4
+ button_down = 5
+ on_click 1 = "exec pactl set-sink-mute 0 toggle"
 }
 
 whoami {
-  format = "⏻ {username}"
-  on_click 1 = "exec i3-sensible-terminal -e reboot"
-  on_click 3 = "exec i3-sensible-terminal -e poweroff"
+ format = "⏻ {username} "
+ on_click 1 = "exec i3-sensible-terminal -e reboot"
+ on_click 3 = "exec i3-sensible-terminal -e poweroff"
 }
 
 wifi {
-  format_up = "  {ip}"
-  format_down = "  down"
-  down_color = "#c0c0c0"
-  color_good = "#1793d0"
-  bitrate_bad = 0
-  bitrate_degraded = .5
-  on_click 1 = "exec i3-sensible-terminal -e nmtui"
-  on_click 3 = "exec killall nmtui"
+ format = " {ip}"
+ format_down = " down"
+ down_color = "#1793d1"
+ color_good = "#20577a"
+ color_degraded = "#e2571e"
+ bitrate_bad = 0
+ bitrate_degraded = .5
 }
 
 window_title_async {
-  color = "#1793d0"
-  format = "📂  {title}"
-  empty_title = " clean "
-  max_width = 28
-  on_click 1 = ""
-  on_click 3 = ""
+ color = "#20577a"
+ format = "🗁 {title}"
+ empty_title = " clean "
+ max_width = 28
+ on_click 1 = ""
+ on_click 3 = ""
 }
 
 
 xrandr_rotate {
-  screen = "eDP1"
-  color_good = "#c0c0c0"
-  horizontal_icon = ""
-  vertical_icon = ""
-  on_click 1 = "exec --no-startup-id /home/john/aur/grox/grox.rb normal"
-  on_click 3 = "exec --no-startup-id /home/john/aur/grox/grox.rb right"
+ screen = "eDP1"
+ color_good = "#20577a"
+ horizontal_icon = ""
+ vertical_icon = ""
+ on_click 1 = "exec --no-startup-id /home/john/aur/grox/grox.rb normal"
+ on_click 3 = "exec --no-startup-id /home/john/aur/grox/grox.rb right"
+ cache_timeout = 5
 }
